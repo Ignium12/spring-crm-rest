@@ -1,14 +1,13 @@
 package com.kruehl.spring.dao;
 
-import java.util.List;
-
+import com.kruehl.spring.entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kruehl.spring.entity.Customer;
+import java.util.List;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
@@ -25,14 +24,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 				
 		// create a query  ... sort by last name
 		Query<Customer> theQuery = 
-				currentSession.createQuery("from Customer order by lastName",
-											Customer.class);
-		
-		// execute query and get result list
-		List<Customer> customers = theQuery.getResultList();
-				
+				currentSession.createQuery("from Customer order by lastName", Customer.class);
+
 		// return the results		
-		return customers;
+		return theQuery.getResultList();
 	}
 
 	@Override

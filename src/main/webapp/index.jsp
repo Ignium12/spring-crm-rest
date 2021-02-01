@@ -5,6 +5,8 @@
 
 <hr>
 
+<a href="/api/customers">Customers</a>
+
 
 </body>
 </html>

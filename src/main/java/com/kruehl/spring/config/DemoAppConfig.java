@@ -1,11 +1,6 @@
 package com.kruehl.spring.config;
 
-import java.beans.PropertyVetoException;
-import java.util.Properties;
-import java.util.logging.Logger;
-
-import javax.sql.DataSource;
-
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +14,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
+import java.util.Properties;
+import java.util.logging.Logger;
 
 @Configuration
 @EnableWebMvc
@@ -32,8 +30,6 @@ public class DemoAppConfig implements WebMvcConfigurer {
 	private Environment env;
 	
 	private Logger logger = Logger.getLogger(getClass().getName());
-	
-	// define a bean for ViewResolver
 
 	@Bean
 	public DataSource myDataSource() {
@@ -80,7 +76,7 @@ public class DemoAppConfig implements WebMvcConfigurer {
 
 	
 	// need a helper method 
-	// read environment property and convert to int
+	// read environment property and convert to int !!!important!!!
 	
 	private int getIntProperty(String propName) {
 		
