@@ -3,10 +3,7 @@ package com.kruehl.spring.rest;
 import com.kruehl.spring.entity.Customer;
 import com.kruehl.spring.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +28,24 @@ public class CustomerRestController {
         if (customer == null){
             throw new CustomerNotFoundException("Customer id not found - " + customerId);
         }
+        return customer;
+    }
+
+    @PostMapping("/customers")
+    public Customer addCustomer(@RequestBody Customer customer){
+
+        // force save of new item because of the hibernate saveorupdate method
+        customer.setId(0);
+
+        customerService.saveCustomer(customer);
+
+        return customer;
+    }
+
+    @PutMapping("/customers")
+    public Customer updateCustomer(@RequestBody Customer customer){
+        customerService.saveCustomer(customer);
+
         return customer;
     }
 
